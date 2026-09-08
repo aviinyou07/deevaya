@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+}
+
+@theme {
+  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-sans), "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --color-canvas: #ffffff;
+  --color-studio: #fcfbf9;
+  --color-alabaster: #f7f5f0;
+  --color-sand: #eae5dc;
+  --color-bronze: #9a7b56;
+  --color-bronze-dark: #7d6140;
+  --color-onyx: #111111;
+  --color-charcoal: #262626;
+  --color-graphite: #52525b;
+  --color-muted: #71717a;
+  --color-border-hairline: #e4e4e7;
+  --color-sage: #e8efe9;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  selection-background-color: #9a7b56;
+  selection-color: #ffffff;
+}
+
+/* Custom editorial typography utilities */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reading progress bar */
+#reading-progress {
+  transform-origin: 0%;
+}
