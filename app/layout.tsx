@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site-config";
 import { Navbar } from "@/components/layout/Navbar";
@@ -12,9 +12,10 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const poppins = Poppins({
   variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -67,10 +68,10 @@ export default function RootLayout({
   const roomFormulas = getRoomFormulas();
 
   return (
-    <html
-      lang="en"
-      className={`${playfair.variable} ${plusJakarta.variable} h-full antialiased`}
-    >
+      <html
+        lang="en"
+        className={`${playfair.variable} ${poppins.variable} h-full antialiased`}
+      >
       <body className="min-h-full flex flex-col bg-white text-zinc-900 font-sans selection:bg-amber-900 selection:text-white">
         <Navbar posts={posts} products={products} roomFormulas={roomFormulas} />
         <main className="flex-1">{children}</main>

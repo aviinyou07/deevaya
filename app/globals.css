@@ -7,7 +7,7 @@
 
 @theme {
   --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
-  --font-sans: var(--font-sans), "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: var(--font-sans), "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
 
   --color-canvas: #ffffff;
   --color-studio: #fcfbf9;

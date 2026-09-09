@@ -24,12 +24,14 @@ interface HomeClientProps {
   featuredProducts: Product[];
   roomFormulas: RoomFormula[];
   recentPosts: Post[];
+  seasonalProducts?: Product[];
 }
 
 export function HomeClient({
   featuredProducts,
   roomFormulas,
   recentPosts,
+  seasonalProducts = [],
 }: HomeClientProps) {
   const [selectedFormula, setSelectedFormula] = useState<RoomFormula | null>(null);
 
@@ -80,78 +82,50 @@ export function HomeClient({
   ];
 
   return (
-    <div className="space-y-20 sm:space-y-28">
+    <div className="space-y-12 sm:space-y-24">
       {/* 1. HERO SECTION */}
-      <section className="relative pt-12 sm:pt-20 pb-12 sm:pb-24 border-b border-zinc-200/70 overflow-hidden bg-gradient-to-b from-stone-50/60 via-white to-white">
+      <section className="relative pt-6 sm:pt-16 pb-6 sm:pb-16 border-b border-zinc-200/70 overflow-hidden bg-gradient-to-b from-stone-50/60 via-white to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
             {/* Left Content */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div className="lg:col-span-7 space-y-4 sm:space-y-6 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-stone-100 border border-stone-200 text-stone-800 text-[11px] font-medium tracking-widest uppercase">
                 <Sparkles className="w-3.5 h-3.5 text-amber-700" />
                 <span>Interior Inspiration & Curated Finds</span>
               </div>
 
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal text-zinc-950 tracking-tight leading-[1.15]">
-                Create a Home You’ll Love Coming Back To.
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-zinc-950 tracking-tight leading-[1.15]">
+                Create a Beautiful Home You’ll Always Love Coming Back To.
               </h1>
 
-              <p className="text-zinc-600 text-base sm:text-lg max-w-2xl font-light leading-relaxed">
-                Every home has a story waiting to be told. Beautiful spaces aren’t defined by
-                expensive furniture or fleeting trends—they’re created through comfort, warmth,
-                and the moments shared.
+              <p className="text-zinc-600 text-sm sm:text-base md:text-lg max-w-2xl font-light leading-relaxed">
+                Inspiring décor ideas, thoughtfully curated Amazon finds, and simple room formulas for every space you love.
               </p>
 
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+                <Link
+                  href="/blog"
+                  className="px-5 py-3 sm:px-6 sm:py-3.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-all shadow-md hover:shadow-lg inline-flex items-center gap-2"
+                >
+                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <span>Explore Latest Blogs</span>
+                </Link>
+
                 <Link
                   href="/shop"
-                  className="px-6 py-3.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-md hover:shadow-lg inline-flex items-center gap-2"
+                  className="px-5 py-3 sm:px-6 sm:py-3.5 rounded-xl border border-zinc-300 hover:border-zinc-900 text-zinc-800 text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-all inline-flex items-center gap-1.5 sm:gap-2"
                 >
-                  <ShoppingBag className="w-4 h-4" />
+                  <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   <span>Shop Amazon Finds</span>
                 </Link>
-
-                <Link
-                  href="/deevaya-room-formula"
-                  className="px-6 py-3.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 text-xs font-semibold uppercase tracking-wider transition-all border border-amber-300/60 inline-flex items-center gap-2"
-                >
-                  <Sparkles className="w-4 h-4 text-amber-700" />
-                  <span>Room Formulas</span>
-                </Link>
-
-                <a
-                  href={siteConfig.socials.amazonStorefront}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-3.5 rounded-xl border border-zinc-300 hover:border-zinc-900 text-zinc-800 text-xs font-medium uppercase tracking-wider transition-all inline-flex items-center gap-1.5"
-                >
-                  <span>Amazon Storefront</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
-                </a>
-              </div>
-
-              {/* Reassurance pills */}
-              <div className="pt-6 border-t border-zinc-200/80 grid grid-cols-3 gap-4 text-center lg:text-left">
-                <div>
-                  <p className="font-serif text-2xl font-medium text-zinc-950">470+</p>
-                  <p className="text-[11px] text-zinc-500 uppercase tracking-wider">Curated Finds</p>
-                </div>
-                <div>
-                  <p className="font-serif text-2xl font-medium text-zinc-950">11</p>
-                  <p className="text-[11px] text-zinc-500 uppercase tracking-wider">Room Formulas</p>
-                </div>
-                <div>
-                  <p className="font-serif text-2xl font-medium text-zinc-950">62</p>
-                  <p className="text-[11px] text-zinc-500 uppercase tracking-wider">Design Guides</p>
-                </div>
               </div>
             </div>
 
             {/* Right Editorial Collage */}
             <div className="lg:col-span-5 relative">
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-lg border border-zinc-200/80 bg-zinc-100">
+              <div className="grid grid-cols-2 gap-2 sm:gap-4">
+                <div className="space-y-2 sm:space-y-4">
+                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-md border border-zinc-200/80 bg-zinc-100">
                     <Image
                       src="https://deevaya.com/wp-content/uploads/2026/09/IMG_4978.png"
                       alt="Deevaya curated living room"
@@ -175,8 +149,8 @@ export function HomeClient({
                   </div>
                 </div>
 
-                <div className="space-y-3 sm:space-y-4 pt-6">
-                  <div className="relative aspect-square rounded-2xl overflow-hidden shadow-md border border-zinc-200/80 bg-zinc-100">
+                <div className="space-y-2 sm:space-y-4 pt-4 sm:pt-6">
+                  <div className="relative aspect-square rounded-2xl overflow-hidden shadow-sm border border-zinc-200/80 bg-zinc-100">
                     <Image
                       src="https://deevaya.com/wp-content/uploads/2026/09/B4C0298B-567F-4966-8FE0-5EBACFCB06D9-1.png"
                       alt="Deevaya cozy bedroom"
@@ -201,6 +175,76 @@ export function HomeClient({
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* LATEST ON THE BLOG */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10 space-y-2">
+          <span className="text-[11px] font-bold tracking-[0.25em] text-zinc-400 uppercase">
+            The Deevaya Journal
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl text-zinc-950 font-normal mt-1">
+            Latest on the Blog
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {recentPosts.slice(0, 2).map((post) => (
+            <PostCard key={post.id} post={post} priority={true} />
+          ))}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <Link
+            href="/blog"
+            className="px-8 py-3.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-md hover:shadow-lg inline-flex items-center gap-2"
+          >
+            <span>View All Blogs</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* SHOP AMAZON FINDS */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <span className="text-[11px] font-bold tracking-[0.25em] text-zinc-400 uppercase">
+              Curated Selection
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl text-zinc-950 font-normal mt-1">
+              Shop Amazon Finds
+            </h2>
+          </div>
+          <Link
+            href="/shop"
+            className="text-xs uppercase tracking-wider text-zinc-900 hover:text-amber-900 font-semibold inline-flex items-center gap-1 transition-colors"
+          >
+            <span>Explore Entire Catalog</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {featuredProducts.map((product, idx) => (
+            <ProductCard key={product.id} product={product} priority={idx < 4} />
+          ))}
+        </div>
+
+        <div className="mt-10 flex flex-col items-center justify-center gap-3 text-center">
+          <p className="text-[11px] text-zinc-500">
+            As an Amazon Associate I earn from qualifying purchases.
+          </p>
+          <a
+            href={siteConfig.socials.amazonStorefront}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] uppercase tracking-widest text-zinc-600 hover:text-zinc-950 underline underline-offset-4 transition-colors inline-flex items-center gap-1"
+          >
+            <span>Visit Full Amazon Storefront</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
         </div>
       </section>
 
@@ -315,34 +359,38 @@ export function HomeClient({
         </div>
       </section>
 
-      {/* 4. CURATED AMAZON FINDS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-          <div>
-            <span className="text-[11px] font-bold tracking-[0.25em] text-zinc-400 uppercase">
-              Curated Amazon Finds
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-zinc-950 font-normal mt-1">
-              Thoughtfully Chosen for Your Home
-            </h2>
+
+
+      {/* 6. SEASONAL FINDS */}
+      {seasonalProducts.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+            <div>
+              <span className="text-[11px] font-bold tracking-[0.25em] text-amber-900 uppercase">
+                Currently Loving
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl text-zinc-950 font-normal mt-1">
+                Seasonal Finds
+              </h2>
+            </div>
+            <Link
+              href="/fall-decor-finds"
+              className="text-xs uppercase tracking-wider text-zinc-900 hover:text-amber-900 font-semibold inline-flex items-center gap-1 transition-colors"
+            >
+              <span>Explore Fall Decor</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
-          <Link
-            href="/shop"
-            className="text-xs uppercase tracking-wider text-zinc-900 hover:text-amber-900 font-semibold inline-flex items-center gap-1 transition-colors"
-          >
-            <span>Explore Entire Catalog</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {featuredProducts.map((product, idx) => (
-            <ProductCard key={product.id} product={product} priority={idx < 4} />
-          ))}
-        </div>
-      </section>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {seasonalProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </section>
+      )}
 
-      {/* 5. EDITORIAL PHILOSOPHY & BRAND MANIFESTO */}
+      {/* 7. EDITORIAL PHILOSOPHY & BRAND MANIFESTO */}
       <section className="bg-stone-50 py-16 sm:py-24 border-y border-stone-200/80">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-6 max-w-3xl mx-auto">
@@ -396,32 +444,7 @@ export function HomeClient({
         </div>
       </section>
 
-      {/* 6. LATEST FROM THE JOURNAL */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-          <div>
-            <span className="text-[11px] font-bold tracking-[0.25em] text-zinc-400 uppercase">
-              The Deevaya Journal
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-zinc-950 font-normal mt-1">
-              Interior Guides & Inspiration
-            </h2>
-          </div>
-          <Link
-            href="/blog"
-            className="text-xs uppercase tracking-wider text-zinc-900 hover:text-amber-900 font-semibold inline-flex items-center gap-1 transition-colors"
-          >
-            <span>Read All 62 Articles</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {recentPosts.slice(0, 3).map((post) => (
-            <PostCard key={post.id} post={post} />
-          ))}
-        </div>
-      </section>
 
       {/* 7. NEWSLETTER SECTION */}
       <NewsletterSection />

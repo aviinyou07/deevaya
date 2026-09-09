@@ -25,22 +25,31 @@ interface NavbarProps {
 export function Navbar({ posts, products, roomFormulas }: NavbarProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isRoomsOpen, setIsRoomsOpen] = useState(false);
+  const [isExploreOpen, setIsExploreOpen] = useState(false);
+  const [isShopOpen, setIsShopOpen] = useState(false);
   const pathname = usePathname();
 
-  const rooms = [
-    { label: "Living Room Finds", href: "/shop/deevaya-living-room-finds", count: "114 Items" },
-    { label: "Bedroom Finds", href: "/shop/deevaya-bedroom-finds", count: "112 Items" },
-    { label: "Kitchen Finds", href: "/shop/deevaya-kitchen-finds", count: "56 Items" },
-    { label: "Bathroom Favorites", href: "/shop/deevaya-bathroom-favorites", count: "23 Items" },
-    { label: "Fall Decor Finds", href: "/fall-decor-finds", count: "Seasonal" },
+  const exploreRooms = [
+    { label: "Living Room", href: "/shop/deevaya-living-room-finds" },
+    { label: "Bedroom", href: "/shop/deevaya-bedroom-finds" },
+    { label: "Kitchen & Dining", href: "/shop/deevaya-kitchen-finds" },
+    { label: "Bathroom", href: "/shop/deevaya-bathroom-favorites" },
+    { label: "Small Space Living", href: "/shop/small-space-living" },
+  ];
+
+  const shopFinds = [
+    { label: "Kitchen Finds", href: "/shop/deevaya-kitchen-finds" },
+    { label: "Bathroom Finds", href: "/shop/deevaya-bathroom-favorites" },
+    { label: "Bedroom Finds", href: "/shop/deevaya-bedroom-finds" },
+    { label: "Living Room Finds", href: "/shop/deevaya-living-room-finds" },
+    { label: "Seasonal Finds", href: "/fall-decor-finds" },
   ];
 
   return (
     <>
       {/* Top Editorial Announcement Strip */}
       <div className="bg-zinc-950 text-zinc-300 text-[11px] sm:text-xs py-2 px-4 text-center tracking-widest uppercase font-light border-b border-zinc-900 flex items-center justify-center gap-3">
-        <span>Curating Timeless Homes & Signature Room Formulas</span>
+        <span>TIMELESS HOME IDEAS & CURATED FINDS</span>
         <span className="hidden md:inline text-zinc-600">•</span>
         <Link
           href="/deevaya-room-formula"
@@ -79,109 +88,108 @@ export function Navbar({ posts, products, roomFormulas }: NavbarProps) {
             </div>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-8 text-[13px] tracking-wider uppercase font-medium text-zinc-700">
+            <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-[11px] xl:text-[12px] tracking-wider uppercase font-medium text-zinc-700">
               <Link
                 href="/"
-                className={`transition-colors hover:text-zinc-950 ${
-                  pathname === "/" ? "text-zinc-950 font-semibold border-b border-zinc-900 pb-0.5" : ""
+                className={`whitespace-nowrap transition-colors hover:text-zinc-950 ${
+                  pathname === "/" ? "text-zinc-950 font-bold border-b border-zinc-900 pb-0.5" : ""
                 }`}
               >
                 Home
               </Link>
 
-              {/* Rooms Dropdown */}
+              {/* Explore by Room Dropdown */}
               <div
                 className="relative"
-                onMouseEnter={() => setIsRoomsOpen(true)}
-                onMouseLeave={() => setIsRoomsOpen(false)}
+                onMouseEnter={() => setIsExploreOpen(true)}
+                onMouseLeave={() => setIsExploreOpen(false)}
               >
                 <button
                   type="button"
-                  className="flex items-center gap-1.5 uppercase hover:text-zinc-950 py-2 transition-colors"
+                  className="flex items-center gap-1 xl:gap-1.5 uppercase hover:text-zinc-950 py-2 transition-colors"
                 >
-                  <span>Rooms</span>
+                  <span className={`whitespace-nowrap ${pathname.startsWith("/shop/") && exploreRooms.some(r => pathname === r.href) ? "text-zinc-950 font-bold border-b border-zinc-900 pb-0.5" : ""}`}>Explore by Room</span>
                   <ChevronDown className="w-3.5 h-3.5 text-zinc-400" />
                 </button>
 
-                {isRoomsOpen && (
-                  <div className="absolute top-full left-0 w-64 bg-white rounded-xl shadow-xl border border-zinc-100 py-3 px-2 transition-all animate-in fade-in-50 slide-in-from-top-2">
-                    <div className="px-3 pb-2 mb-1 border-b border-zinc-100 text-[10px] tracking-widest text-zinc-400 uppercase">
-                      Curated Room Finds
-                    </div>
-                    {rooms.map((room) => (
+                {isExploreOpen && (
+                  <div className="absolute top-full left-0 w-48 bg-white rounded-xl shadow-xl border border-zinc-100 py-2 px-1 transition-all animate-in fade-in-50 slide-in-from-top-2">
+                    {exploreRooms.map((room) => (
                       <Link
                         key={room.href}
                         href={room.href}
-                        className="flex items-center justify-between px-3 py-2 rounded-lg text-xs hover:bg-zinc-50 hover:text-zinc-950 transition-colors"
+                        className="block px-3 py-2 rounded-lg text-xs hover:bg-zinc-50 hover:text-zinc-950 transition-colors whitespace-nowrap"
                       >
-                        <span>{room.label}</span>
-                        <span className="text-[10px] text-zinc-400 tracking-normal capitalize font-serif">
-                          {room.count}
-                        </span>
+                        {room.label}
                       </Link>
                     ))}
-                    <div className="mt-2 pt-2 border-t border-zinc-100">
+                  </div>
+                )}
+              </div>
+
+              {/* Shop Amazon Finds Dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setIsShopOpen(true)}
+                onMouseLeave={() => setIsShopOpen(false)}
+              >
+                <button
+                  type="button"
+                  className="flex items-center gap-1 xl:gap-1.5 uppercase hover:text-zinc-950 py-2 transition-colors"
+                >
+                  <span className={`whitespace-nowrap ${pathname.startsWith("/shop/") && shopFinds.some(r => pathname === r.href) ? "text-zinc-950 font-bold border-b border-zinc-900 pb-0.5" : ""}`}>Shop Amazon Finds</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-zinc-400" />
+                </button>
+
+                {isShopOpen && (
+                  <div className="absolute top-full left-0 w-48 bg-white rounded-xl shadow-xl border border-zinc-100 py-2 px-1 transition-all animate-in fade-in-50 slide-in-from-top-2">
+                    {shopFinds.map((item) => (
                       <Link
-                        href="/shop"
-                        className="flex items-center justify-between px-3 py-1.5 rounded-lg text-[11px] font-semibold text-zinc-900 hover:bg-zinc-100 transition-colors"
+                        key={item.href}
+                        href={item.href}
+                        className="block px-3 py-2 rounded-lg text-xs hover:bg-zinc-50 hover:text-zinc-950 transition-colors whitespace-nowrap"
                       >
-                        <span>View All Decor</span>
-                        <span>→</span>
+                        {item.label}
                       </Link>
-                    </div>
+                    ))}
                   </div>
                 )}
               </div>
 
               <Link
-                href="/shop"
-                className={`transition-colors hover:text-zinc-950 ${
-                  pathname === "/shop" ? "text-zinc-950 font-semibold border-b border-zinc-900 pb-0.5" : ""
-                }`}
-              >
-                Shop All
-              </Link>
-
-              {/* Room Formula Highlight link */}
-              <Link
                 href="/deevaya-room-formula"
-                className={`group flex items-center gap-1.5 transition-colors hover:text-amber-900 ${
-                  pathname.startsWith("/deevaya-room-formula")
-                    ? "text-zinc-950 font-semibold border-b border-zinc-900 pb-0.5"
-                    : ""
+                className={`whitespace-nowrap transition-colors hover:text-zinc-950 ${
+                  pathname.startsWith("/deevaya-room-formula") ? "text-zinc-950 font-bold border-b border-zinc-900 pb-0.5" : ""
                 }`}
               >
-                <span>Room Formulas</span>
-                <span className="text-[9px] bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold tracking-wider group-hover:bg-amber-200 transition-colors">
-                  DIGITAL
-                </span>
+                Room Formulas
               </Link>
 
               <Link
                 href="/blog"
-                className={`transition-colors hover:text-zinc-950 ${
-                  pathname.startsWith("/blog") ? "text-zinc-950 font-semibold border-b border-zinc-900 pb-0.5" : ""
+                className={`whitespace-nowrap transition-colors hover:text-zinc-950 ${
+                  pathname.startsWith("/blog") ? "text-zinc-950 font-bold border-b border-zinc-900 pb-0.5" : ""
                 }`}
               >
-                Journal
-              </Link>
-
-              <Link
-                href="/explore-deevaya"
-                className={`transition-colors hover:text-zinc-950 ${
-                  pathname === "/explore-deevaya" ? "text-zinc-950 font-semibold border-b border-zinc-900 pb-0.5" : ""
-                }`}
-              >
-                Explore
+                Journal / Blog
               </Link>
 
               <Link
                 href="/about-us"
-                className={`transition-colors hover:text-zinc-950 ${
-                  pathname === "/about-us" ? "text-zinc-950 font-semibold border-b border-zinc-900 pb-0.5" : ""
+                className={`whitespace-nowrap transition-colors hover:text-zinc-950 ${
+                  pathname === "/about-us" ? "text-zinc-950 font-bold border-b border-zinc-900 pb-0.5" : ""
                 }`}
               >
                 About
+              </Link>
+
+              <Link
+                href="/contact-us"
+                className={`whitespace-nowrap transition-colors hover:text-zinc-950 ${
+                  pathname === "/contact-us" ? "text-zinc-950 font-bold border-b border-zinc-900 pb-0.5" : ""
+                }`}
+              >
+                Contact
               </Link>
             </nav>
 
@@ -218,86 +226,83 @@ export function Navbar({ posts, products, roomFormulas }: NavbarProps) {
         {/* Mobile Navigation Drawer */}
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-zinc-200 bg-white px-6 py-6 space-y-4 animate-in slide-in-from-top duration-200">
-            <div className="space-y-3">
+            <div className="space-y-1">
               <Link
                 href="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-sm font-medium uppercase tracking-wider text-zinc-900 py-1"
+                className="block text-[13px] font-semibold uppercase tracking-wider text-zinc-900 py-2"
               >
                 Home
               </Link>
 
-              <div className="pt-2 pb-1 border-t border-zinc-100">
-                <span className="text-[11px] font-semibold text-zinc-400 tracking-widest uppercase">
-                  Curated Rooms
+              <div className="py-2">
+                <span className="text-[10px] font-bold text-zinc-400 tracking-widest uppercase mb-1 block">
+                  Explore by Room
                 </span>
-                <div className="mt-2 space-y-2 pl-2">
-                  {rooms.map((room) => (
+                <div className="pl-3 border-l-2 border-zinc-100 space-y-1">
+                  {exploreRooms.map((room) => (
                     <Link
                       key={room.href}
                       href={room.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center justify-between text-xs text-zinc-700 hover:text-zinc-950 py-1"
+                      className="block text-xs text-zinc-600 hover:text-zinc-950 py-1.5"
                     >
-                      <span>{room.label}</span>
-                      <span className="text-[10px] text-zinc-400">{room.count}</span>
+                      {room.label}
                     </Link>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-zinc-100 space-y-3">
-                <Link
-                  href="/shop"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-sm font-medium uppercase tracking-wider text-zinc-900 py-1"
-                >
-                  Shop All Finds
-                </Link>
-
-                <Link
-                  href="/deevaya-room-formula"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between text-sm font-medium uppercase tracking-wider text-amber-900 py-1"
-                >
-                  <span>Room Formulas</span>
-                  <span className="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">
-                    11 GUIDES
-                  </span>
-                </Link>
-
-                <Link
-                  href="/blog"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-sm font-medium uppercase tracking-wider text-zinc-900 py-1"
-                >
-                  Journal / Articles
-                </Link>
-
-                <Link
-                  href="/explore-deevaya"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-sm font-medium uppercase tracking-wider text-zinc-900 py-1"
-                >
-                  Explore (Bio Links)
-                </Link>
-
-                <Link
-                  href="/about-us"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-sm font-medium uppercase tracking-wider text-zinc-900 py-1"
-                >
-                  About Us
-                </Link>
-
-                <Link
-                  href="/contact-us"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-sm font-medium uppercase tracking-wider text-zinc-900 py-1"
-                >
-                  Contact Us
-                </Link>
+              <div className="py-2">
+                <span className="text-[10px] font-bold text-zinc-400 tracking-widest uppercase mb-1 block">
+                  Shop Amazon Finds
+                </span>
+                <div className="pl-3 border-l-2 border-zinc-100 space-y-1">
+                  {shopFinds.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block text-xs text-zinc-600 hover:text-zinc-950 py-1.5"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
+
+              <Link
+                href="/deevaya-room-formula"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-[13px] font-semibold uppercase tracking-wider text-zinc-900 py-2"
+              >
+                Room Formulas
+              </Link>
+
+              <Link
+                href="/blog"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-[13px] font-semibold uppercase tracking-wider text-zinc-900 py-2"
+              >
+                Journal / Blog
+              </Link>
+
+              <Link
+                href="/about-us"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-[13px] font-semibold uppercase tracking-wider text-zinc-900 py-2"
+              >
+                About
+              </Link>
+
+              <Link
+                href="/contact-us"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-[13px] font-semibold uppercase tracking-wider text-zinc-900 py-2"
+              >
+                Contact
+              </Link>
+            </div>
 
               {/* Mobile Socials */}
               <div className="pt-4 border-t border-zinc-100 flex items-center gap-4">
@@ -319,7 +324,6 @@ export function Navbar({ posts, products, roomFormulas }: NavbarProps) {
                 </a>
               </div>
             </div>
-          </div>
         )}
       </header>
 
